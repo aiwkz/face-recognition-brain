@@ -1,0 +1,10 @@
+.logo-container {
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    margin: 10px;
+}
+
+.tilt {
+    width: 60px;
+}
