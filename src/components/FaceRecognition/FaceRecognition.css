@@ -1,0 +1,19 @@
+.img-container {
+    position: absolute;
+    margin-block-start: .5rem;
+}
+
+.img {
+    max-width: 37.5rem;
+    min-width: 15rem;
+    height: auto;
+}
+
+.bounding-box {
+    position: absolute;
+    box-shadow: 0 0 0 0.1rem #149df2 inset;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: pointer;
+}

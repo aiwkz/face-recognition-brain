@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import SignIn from './components/SignIn/SignIn';
 import ParticlesBg from 'particles-bg'
 import './App.css';
 
@@ -9,19 +11,86 @@ class App extends Component {
     super();
     this.state = {
       input: '',
+      imageUrl: '',
+      box: {},
     }
   }
 
+  calculateFaceLocation = (data) => {
+    const clarifaiFaceData = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('inputImage');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    return {
+      leftCol: clarifaiFaceData.left_col * width,
+      topRow: clarifaiFaceData.top_row * height,
+      rightCol: width - (clarifaiFaceData.right_col * width),
+      bottomRow: height - (clarifaiFaceData.bottom_row * height)
+    }
+  }
+
+  displayFaceBox = (box) => {
+    console.log(box)
+    this.setState({ box: box })
+  }
+
   onInputChange = (event) => {
-    console.log(event.target.value);
+    this.setState({ input: event.target.value });
+  }
+
+  onSubmit = () => {
+    this.setState({ imageUrl: this.state.input })
+
+    const PAT = '10881e14e6ec49e185af430e206583ca';
+    const USER_ID = 'aiwkz';       
+    const APP_ID = 'face-recognition-brain';
+    const MODEL_ID = 'face-detection';  
+    const IMAGE_URL = this.state.input;
+
+    const raw = JSON.stringify({
+        "user_app_id": {
+          "user_id": USER_ID,
+          "app_id": APP_ID
+        },
+        "inputs": [
+          {
+            "data": {
+              "image": {
+                "url": IMAGE_URL
+              }
+            }
+          }
+        ]
+    });
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Key ' + PAT
+        },
+        body: raw
+    };
+
+    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
+      .then(response => response.json())
+      .then(result => this.displayFaceBox(this.calculateFaceLocation(result)))
+      .catch(error => console.log('error', error));
   }
 
   render() {
     return(
       <div className='App'>
         <Navigation />
-        <ImageLinkForm onInputChange={this.onInputChange} />
-        {/*<FaceRecognition />*/}
+        <ImageLinkForm 
+          onInputChange={this.onInputChange}
+          onSubmit={this.onSubmit}
+        />
+        <FaceRecognition 
+          imageUrl={this.state.imageUrl} 
+          box={this.state.box}
+        />
+        <SignIn />
         <ParticlesBg type='cobweb' bg={true} color='#0FF0FC' />
       </div>
     );
