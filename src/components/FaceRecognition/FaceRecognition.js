@@ -2,7 +2,7 @@ import React from "react";
 import './FaceRecognition.css';
 
 const FaceRecognition = ({ imageUrl, box }) => {
-    return(
+    return (
         <div className='center'>
             <div className='img-container'>
                 <img 
