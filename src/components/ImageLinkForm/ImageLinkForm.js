@@ -1,7 +1,7 @@
 import React from "react";
 import './ImageLinkForm.css';
 
-const ImageLinkForm = () => {
+const ImageLinkForm = ({ onInputChange }) => {
     return (
         <div className='form-container'>
             <div className='form-title'>
@@ -9,7 +9,7 @@ const ImageLinkForm = () => {
                 <span>Paste the img url to try!</span>
             </div>
             <div className='center'>
-                <input type='text'/>
+                <input type='text' onChange={onInputChange}/>
                 <button 
                     className='form-button'
                     style={{ '--clr':'#0FF0FC' }}
