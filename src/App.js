@@ -16,7 +16,24 @@ class App extends Component {
       box: {},
       route: 'signin',
       isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        joined: '',
+      }
     }
+  }
+
+  loadUser = (userData) => {
+    this.setState({
+      user: {
+        id: userData.id,
+        name: userData.name,
+        email: userData.email,
+        joined: userData.joined,
+      }
+    })
   }
 
   calculateFaceLocation = (data) => {
@@ -111,7 +128,7 @@ class App extends Component {
           : (
             route === 'signin' || route === 'signout'
             ? <SignIn onRouteChange={this.onRouteChange} />
-            : <Register onRouteChange={this.onRouteChange} />
+            : <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
           )
         }
         <ParticlesBg type='cobweb' bg={true} color='#0FF0FC' />
