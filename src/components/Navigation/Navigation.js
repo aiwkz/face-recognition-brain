@@ -2,7 +2,7 @@ import React from "react";
 import Logo from '../Logo/Logo';
 import './Navigation.css';
 
-const Navigation = ({ onRouteChange, isSignedIn }) => {
+const Navigation = ({ onRouteChange, isSignedIn, route }) => {
     if (isSignedIn === true) {
         return (
             <nav className='navigation-container'>
@@ -16,6 +16,11 @@ const Navigation = ({ onRouteChange, isSignedIn }) => {
         return (
             <nav className='navigation-container'>
                 <Logo />
+                {route === 'register' && 
+                    <span className='loggin-text' onClick={() => onRouteChange('signin')}>
+                        Sign In
+                    </span>
+                }
             </nav>
         )
     }

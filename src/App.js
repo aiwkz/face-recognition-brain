@@ -83,6 +83,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
+      this.setState({ route: 'singin' })
       this.setState({ isSignedIn: false })
     } else if (route === 'home') {
       this.setState({ isSignedIn: true })
@@ -95,7 +96,7 @@ class App extends Component {
     const { isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className='App'>
-        <Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} />
+        <Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} route={route} />
         { route === 'home' 
           ? <div>
               <ImageLinkForm 
@@ -108,7 +109,7 @@ class App extends Component {
               />
             </div>
           : (
-            route === 'signin'
+            route === 'signin' || route === 'signout'
             ? <SignIn onRouteChange={this.onRouteChange} />
             : <Register onRouteChange={this.onRouteChange} />
           )
