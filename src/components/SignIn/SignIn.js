@@ -30,6 +30,7 @@ class SignIn extends Component {
             .then(user => {
                 user.id && this.props.onRouteChange('home')
             })
+            .catch(console.log)
     }
 
     render() {
