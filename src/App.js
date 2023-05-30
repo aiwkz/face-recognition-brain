@@ -68,7 +68,7 @@ class App extends Component {
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input })
 
-    fetch('https://ancient-savannah-73602.herokuapp.com/imageUrl', {
+    fetch('https://face-recognition-brain-api-gu0q.onrender.com/imageUrl', {
       method: 'post',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({
