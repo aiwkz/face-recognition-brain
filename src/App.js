@@ -68,41 +68,16 @@ class App extends Component {
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input })
 
-    const PAT = '10881e14e6ec49e185af430e206583ca';
-    const USER_ID = 'aiwkz';       
-    const APP_ID = 'face-recognition-brain';
-    const MODEL_ID = 'face-detection';  
-    const IMAGE_URL = this.state.input;
-
-    const raw = JSON.stringify({
-        "user_app_id": {
-          "user_id": USER_ID,
-          "app_id": APP_ID
-        },
-        "inputs": [
-          {
-            "data": {
-              "image": {
-                "url": IMAGE_URL
-              }
-            }
-          }
-        ]
-    });
-
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Key ' + PAT
-        },
-        body: raw
-    };
-
-    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
+    fetch('https://ancient-savannah-73602.herokuapp.com/imageUrl', {
+      method: 'post',
+      headers: {'Content-type': 'application/json'},
+      body: JSON.stringify({
+        input: this.state.input,
+      })
+    })
       .then(response => response.json())
       .then(result => this.displayFaceBox(this.calculateFaceLocations(result)))
-      .catch(error => console.log('error', error));
+      .catch(console.log)
   }
 
   onRouteChange = (route) => {
