@@ -70,10 +70,7 @@ class App extends Component {
 
     fetch('https://face-recognition-brain-api-gu0q.onrender.com/imageUrl', {
         method: 'post',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-type': 'application/json'
-        },
+        headers: {'Content-type': 'application/json'},
         body: this.state.input,
     })
       .then(response => response.json())
