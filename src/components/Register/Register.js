@@ -23,7 +23,7 @@ class Register extends Component {
     }
 
     onSubmit = () => {
-        fetch('http://face-recognition-brain-api-gu0q.onrender.com/register', {
+        fetch('https://face-recognition-brain-api-gu0q.onrender.com/register', {
             method: 'post',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
