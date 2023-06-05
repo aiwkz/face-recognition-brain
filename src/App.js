@@ -68,12 +68,10 @@ class App extends Component {
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input })
 
-    fetch('https://face-recognition-brain-api-gu0q.onrender.com/imageUrl', {
-      method: 'post',
-      headers: {'Content-type': 'application/json'},
-      body: JSON.stringify({
-        input: this.state.input,
-      })
+    fetch('http://face-recognition-brain-api-gu0q.onrender.com/imageUrl', {
+        method: 'post',
+        headers: {'Content-type': 'application/json'},
+        body: this.state.input,
     })
       .then(response => response.json())
       .then(result => this.displayFaceBox(this.calculateFaceLocations(result)))
