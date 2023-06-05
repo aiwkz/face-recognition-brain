@@ -68,7 +68,7 @@ class App extends Component {
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input })
 
-    fetch('https://face-recognition-brain-api-gu0q.onrender.com/imageUrl', {
+    fetch('https://face-recognition-brain-api-gu0q.onrender.com/imageurl', {
       method: 'post',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({
