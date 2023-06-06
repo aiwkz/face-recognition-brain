@@ -33,6 +33,14 @@ class SignIn extends Component {
             .catch(console.log)
     }
 
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            event.stopPropagation();
+            this.onSubmit();
+        }
+    }
+
     render() {
         const { onRouteChange } = this.props;
         return(
@@ -71,6 +79,7 @@ class SignIn extends Component {
                                     name='password'  
                                     id='password' 
                                     onChange={this.onPasswordChange}
+                                    onKeyDown={this.handleKeyPress}
                                 />
                             </div>
                         </fieldset>
