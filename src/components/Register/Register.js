@@ -42,6 +42,14 @@ class Register extends Component {
             .catch(console.log)
     }
 
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            event.stopPropagation();
+            this.onSubmit();
+        }
+    }
+
     render() {
         return (
             <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center'>
@@ -79,6 +87,7 @@ class Register extends Component {
                                     name='email-address'  
                                     id='email-address' 
                                     onChange={this.onEmailChange}
+                                    onKeyDown={this.handleKeyPress}
                                 />
                             </div>
                             <div className='mv3'>
@@ -94,6 +103,7 @@ class Register extends Component {
                                     name='password'  
                                     id='password' 
                                     onChange={this.onPasswordChange}
+                                    onKeyDown={this.handleKeyPress}
                                 />
                             </div>
                         </fieldset>
