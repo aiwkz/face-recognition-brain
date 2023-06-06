@@ -64,6 +64,7 @@ class SignIn extends Component {
                                     name='email-address'  
                                     id='email-address' 
                                     onChange={this.onEmailChange}
+                                    onKeyDown={this.handleKeyPress}
                                 />
                             </div>
                             <div className='mv3'>
